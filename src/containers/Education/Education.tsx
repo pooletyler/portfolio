@@ -16,7 +16,7 @@ const Education = () => {
             <div className="Main__subSection">
               {entry.degree}
               <span className="Main__highlight">
-                {`• ${entry.date} • ${entry.school}`}
+                {` • ${entry.date} • ${entry.school}`}
               </span>
             </div>
             <br />
