@@ -38,11 +38,8 @@ const Menu = () => {
           >
             FORM GENERATOR
           </a>
-          <a
-            href="https://mars.tylerpoole.dev"
-            className="Menu__subSection"
-          >
-            MARS ON THIS DAY 
+          <a href="https://mars.tylerpoole.dev" className="Menu__subSection">
+            MARS ON THIS DAY
           </a>
         </div>
       </div>
