@@ -24,6 +24,27 @@ const Menu = () => {
         <a href="/#/experience" className="Menu__section">
           WORK EXPERIENCE
         </a>
+        <div className="Menu__section">
+          EXAMPLES
+          <a
+            href="https://color-cart.tylerpoole.dev"
+            className="Menu__subSection"
+          >
+            COLOR CART
+          </a>
+          <a
+            href="https://form-generator.tylerpoole.dev"
+            className="Menu__subSection"
+          >
+            FORM GENERATOR
+          </a>
+          <a
+            href="https://mars.tylerpoole.dev"
+            className="Menu__subSection"
+          >
+            MARS ON THIS DAY 
+          </a>
+        </div>
       </div>
       <div className="Menu__linksContainer">
         <a className="Menu__linkIcon" href="https://github.com/pooletyler">
