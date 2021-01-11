@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { Router, Switch, Route } from 'react-router-dom';
+import { HashRouter, Switch, Route } from 'react-router-dom';
 import openBase64EncodedStringAsPDF from '../../utilities/openBase64EncodedStringAsPDF';
 import history from './history';
 import { ReactComponent as CloseIcon } from '../../ui/close.svg';
@@ -34,7 +34,7 @@ const Routes: FC<any> = () => {
 
   return (
     <div className="Routes-container">
-      <Router history={history}>
+      <HashRouter history={history}>
         <div className="Main" data-test-name="Main">
           <div
             className={
@@ -67,7 +67,7 @@ const Routes: FC<any> = () => {
             </div>
           </div>
         </div>
-      </Router>
+      </HashRouter>
     </div>
   );
 };
