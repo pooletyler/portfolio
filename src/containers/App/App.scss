@@ -1,0 +1,28 @@
+@import '../../sass/base.scss';
+@import '../../sass/layout.scss';
+
+body {
+  font-size: 16px;
+  font-family: 'Roboto';
+  overflow: hidden;
+}
+
+a {
+  color: $blue;
+}
+
+textarea {
+  background-color: $border-color;
+  color: $foreground-color;
+  width: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 15rem;
+  padding: 3rem;
+}
+
+::-webkit-scrollbar {
+  width: 0px; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
+}

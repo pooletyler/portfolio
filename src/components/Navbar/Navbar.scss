@@ -1,0 +1,87 @@
+@import '../../sass/_base.scss';
+@import '../../sass/_layout.scss';
+
+.Navbar {
+  height: 10rem;
+  border-bottom: 5px $blue solid;
+  background-color: $border-color;
+  @include center-vertical;
+  display: flex;
+  overflow: hidden;
+}
+
+.Navbar__title {
+  font-size: 7rem;
+  color: $background-color;
+  font-weight: 800;
+  margin-top: 1.25rem;
+  margin-left: 1rem;
+  visibility: hidden;
+}
+
+.Navbar__subTitle {
+  font-size: 7rem;
+  color: $border-color;
+  font-weight: 800;
+  margin-top: 1.25rem;
+  margin-right: 1rem;
+  visibility: hidden;
+}
+
+.Navbar__titleContainer {
+  background-color: $foreground-color;
+  border-radius: 100%;
+  height: 11rem;
+  min-width: 11rem;
+  display: flex;
+  margin-left: 0.5rem;
+  visibility: hidden;
+}
+
+.Navbar__descriptionContainer {
+  width: 100%;
+  text-align: right;
+  color: $foreground-color;
+  margin-right: 0.5rem;
+  font-weight: 900;
+}
+
+.Navbar__name {
+  font-size: 3rem;
+}
+
+.Navbar__position {
+  font-size: 1rem;
+  padding: 0.5rem;
+}
+
+.Navbar__logo {
+  height: 3rem;
+}
+
+.Navbar--isLoading {
+  height: 5px;
+  margin-top: -4px;
+}
+
+@media only screen and (max-width: 850px) {
+  .Navbar__titleContainer {
+    visibility: visible;
+  }
+
+  .Navbar__title {
+    visibility: visible;
+  }
+
+  .Navbar__subTitle {
+    visibility: visible;
+  }
+
+  .Navbar__name {
+    font-size: 1.5rem;
+  }
+
+  .Navbar__position {
+    font-size: 0.75rem;
+  }
+}
