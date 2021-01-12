@@ -92,15 +92,6 @@
   cursor: pointer;
 }
 
-.Menu__downloadIcon {
-  padding: 1rem;
-  color: $foreground-color;
-}
-
-.Menu__downloadIcon:hover {
-  cursor: pointer;
-}
-
 @media only screen and (max-width: 850px) {
   .Menu__titleContainer {
     height: 0rem;

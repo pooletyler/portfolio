@@ -1,8 +1,28 @@
 import React from 'react';
-import { FaDownload, FaGithub, FaLinkedin } from 'react-icons/fa';
+import * as icons from 'react-icons/fa';
 import './Menu.scss';
 
-const Menu = () => {
+interface Props {
+  config: any;
+}
+
+const Menu = (props: Props) => {
+  const { config } = props;
+
+  // eslint-disable-next-line no-undef
+  const hasKey = <O extends {}>(obj: O, key: keyof any): key is keyof O => {
+    return key in obj;
+  };
+
+  const findIconIfAvailable = (iconString: any, size: string) => {
+    if (iconString && hasKey(icons, iconString)) {
+      const icon = icons[iconString];
+      return icon({ size });
+    }
+
+    return null;
+  };
+
   return (
     <div className="Menu">
       <div className="Menu__titleContainer">
@@ -12,47 +32,29 @@ const Menu = () => {
         </div>
       </div>
       <div className="Menu__contentContainer">
-        <a href="/#/" className="Menu__section">
-          INTRODUCTION
-        </a>
-        <a href="/#/education" className="Menu__section">
-          EDUCATION
-        </a>
-        <a href="/#/skills" className="Menu__section">
-          TECHNICAL SKILLS
-        </a>
-        <a href="/#/experience" className="Menu__section">
-          WORK EXPERIENCE
-        </a>
-        <div className="Menu__section">
-          EXAMPLES
-          <a
-            href="https://color-cart.tylerpoole.dev"
-            className="Menu__subSection"
-          >
-            COLOR CART
-          </a>
-          <a
-            href="https://form-generator.tylerpoole.dev"
-            className="Menu__subSection"
-          >
-            FORM GENERATOR
-          </a>
-          <a href="https://mars.tylerpoole.dev" className="Menu__subSection">
-            MARS ON THIS DAY
-          </a>
-        </div>
+        {config.sections.map((section: any) => {
+          return (
+            <a href={section.link || undefined} className="Menu__section">
+              {section.name.toUpperCase()}
+              {section.sub.map((sub: any) => {
+                return (
+                  <a href={sub.link} className="Menu__subSection">
+                    {sub.name.toUpperCase()}
+                  </a>
+                );
+              })}
+            </a>
+          );
+        })}
       </div>
       <div className="Menu__linksContainer">
-        <a className="Menu__linkIcon" href="https://github.com/pooletyler">
-          <FaGithub size="1.75rem" />
-        </a>
-        <a className="Menu__linkIcon" href="https://linkedin.com/in/pooletb93">
-          <FaLinkedin size="1.75rem" />
-        </a>
-        <a className="Menu__downloadIcon" href="/#/resume">
-          <FaDownload size="1.75rem" />
-        </a>
+        {config.footer.map((icon: any) => {
+          return (
+            <a href={icon.link} className="Menu__linkIcon">
+              {findIconIfAvailable(icon.icon, icon.size)}
+            </a>
+          );
+        })}
       </div>
     </div>
   );

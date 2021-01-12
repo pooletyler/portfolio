@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react';
 import { HashRouter, Switch, Route } from 'react-router-dom';
+import Example from '../../components/Example/Example';
 import openBase64EncodedStringAsPDF from '../../utilities/openBase64EncodedStringAsPDF';
 import history from './history';
 import { ReactComponent as CloseIcon } from '../../ui/close.svg';
@@ -10,6 +11,7 @@ import Navbar from '../../components/Navbar/Navbar';
 import News from '../News/News';
 import TechnicalSkills from '../TechnicalSkills/TechnicalSkills';
 import WorkExperience from '../WorkExperience/WorkExperience';
+import menuConfig from './data/menuConfig';
 import resume from './data/resume';
 import './Routes.scss';
 
@@ -41,7 +43,7 @@ const Routes: FC<any> = () => {
               showMenu ? 'Main__menuShownMobile' : 'Main__menuContainer'
             }
           >
-            <Menu />
+            <Menu config={menuConfig} />
           </div>
           <div
             className={
@@ -63,6 +65,21 @@ const Routes: FC<any> = () => {
                 <Route exact path="/skills" component={TechnicalSkills} />
                 <Route exact path="/experience" component={WorkExperience} />
                 <Route exact path="/resume" component={sendResume} />
+                <Route
+                  exact
+                  path="/example"
+                  component={(props) => {
+                    const params = new URLSearchParams(props.location.search);
+                    const title = params.get('title');
+                    const src = params.get('src');
+
+                    return (
+                      (title && src && <Example title={title} src={src} />) || (
+                        <News />
+                      )
+                    );
+                  }}
+                />
               </Switch>
             </div>
           </div>
