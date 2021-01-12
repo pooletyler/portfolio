@@ -1,5 +1,6 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { HashRouter, Switch, Route } from 'react-router-dom';
+import { motion, useAnimation } from 'framer-motion';
 import Example from '../../components/Example/Example';
 import openBase64EncodedStringAsPDF from '../../utilities/openBase64EncodedStringAsPDF';
 import history from './history';
@@ -16,7 +17,38 @@ import resume from './data/resume';
 import './Routes.scss';
 
 const Routes: FC<any> = () => {
-  const [showMenu, setShowMenu] = useState(false);
+  const [showMenu, setShowMenu] = useState(window.innerWidth > 850);
+  const [page, setPage] = useState('Introduction');
+
+  const menuControls = useAnimation();
+
+  useEffect(() => {
+    if (window.innerWidth <= 850) {
+      setShowMenu(false);
+    }
+  }, [page]);
+
+  useEffect(() => {
+    if (showMenu) {
+      menuControls.start({
+        x: 0,
+        transition: {
+          type: 'spring',
+          stiffness: 260,
+          damping: 20,
+        },
+      });
+    } else {
+      menuControls.start({
+        x: '-100%',
+        transition: {
+          type: 'spring',
+          stiffness: 260,
+          damping: 20,
+        },
+      });
+    }
+  }, [showMenu]);
 
   const handleOnCloseClick = () => {
     setShowMenu(false);
@@ -31,6 +63,7 @@ const Routes: FC<any> = () => {
       resume.content,
       'Tyler Poole - Front End Engineer'
     );
+
     return null;
   };
 
@@ -38,18 +71,10 @@ const Routes: FC<any> = () => {
     <div className="Routes-container">
       <HashRouter history={history}>
         <div className="Main" data-test-name="Main">
-          <div
-            className={
-              showMenu ? 'Main__menuShownMobile' : 'Main__menuContainer'
-            }
-          >
-            <Menu config={menuConfig} />
-          </div>
-          <div
-            className={
-              showMenu ? 'Main__contentHiddenMobile' : 'Main__blockContainer'
-            }
-          >
+          <motion.div className="Main__menuContainer" animate={menuControls}>
+            <Menu config={menuConfig} page={page} />
+          </motion.div>
+          <div className="Main__blockContainer">
             <div className="Main__loadingNavbarContainer">
               <Navbar />
               <div className="Main__menuIcon">
@@ -60,10 +85,38 @@ const Routes: FC<any> = () => {
             </div>
             <div className="Main__contentContainer">
               <Switch>
-                <Route exact path="/" component={News} />
-                <Route exact path="/education" component={Education} />
-                <Route exact path="/skills" component={TechnicalSkills} />
-                <Route exact path="/experience" component={WorkExperience} />
+                <Route
+                  exact
+                  path="/"
+                  component={() => {
+                    setPage('Introduction');
+                    return <News />;
+                  }}
+                />
+                <Route
+                  exact
+                  path="/education"
+                  component={() => {
+                    setPage('Education');
+                    return <Education />;
+                  }}
+                />
+                <Route
+                  exact
+                  path="/skills"
+                  component={() => {
+                    setPage('Technical Skills');
+                    return <TechnicalSkills />;
+                  }}
+                />
+                <Route
+                  exact
+                  path="/experience"
+                  component={() => {
+                    setPage('Work Experience');
+                    return <WorkExperience />;
+                  }}
+                />
                 <Route exact path="/resume" component={sendResume} />
                 <Route
                   exact
@@ -72,6 +125,8 @@ const Routes: FC<any> = () => {
                     const params = new URLSearchParams(props.location.search);
                     const title = params.get('title');
                     const src = params.get('src');
+
+                    setPage(`Examples-${title}`);
 
                     return (
                       (title && src && <Example title={title} src={src} />) || (

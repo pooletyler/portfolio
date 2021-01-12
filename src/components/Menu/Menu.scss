@@ -39,6 +39,10 @@
   text-decoration: none;
 }
 
+.Menu__highlighted {
+  color: $blue;
+}
+
 .Menu__subSection:hover {
   cursor: pointer;
 }
