@@ -39,6 +39,10 @@ const menuConfig = {
           link:
             '/#/example?title=Mars on This Day&src=https://mars.tylerpoole.dev',
         },
+        {
+          name: 'Pokedex',
+          link: '/#/example?title=Pokedex&src=https://pokedex.tylerpoole.dev',
+        },
       ],
     },
   ],
