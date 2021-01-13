@@ -71,9 +71,9 @@ const Menu = (props: Props) => {
               }`}
               key={section.name}
               variants={link}
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: (section.sub.length === 0 && 1.05) || 1 }}
               whileTap={{
-                scale: 0.8,
+                scale: (section.sub.length === 0 && 0.8) || 1,
               }}
             >
               {section.name.toUpperCase()}
